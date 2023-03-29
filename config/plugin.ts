@@ -1,34 +1,29 @@
 import { EggPlugin } from 'egg';
 
 const plugin: EggPlugin = {
-  tegg: {
+  static: true,
+  // nunjucks: {
+  //   enable: true,
+  //   package: 'egg-view-nunjucks',
+  // },
+  cors: {
     enable: true,
-    package: '@eggjs/tegg-plugin',
+    package: 'egg-cors'
   },
-  teggConfig: {
+  routerPlus: {
     enable: true,
-    package: '@eggjs/tegg-config',
+    package: 'egg-router-plus'
   },
-  teggController: {
+  redis: {
     enable: true,
-    package: '@eggjs/tegg-controller-plugin',
-  },
-  teggSchedule: {
-    enable: true,
-    package: '@eggjs/tegg-schedule-plugin',
-  },
-  eventbusModule: {
-    enable: true,
-    package: '@eggjs/tegg-eventbus-plugin',
-  },
-  aopModule: {
-    enable: true,
-    package: '@eggjs/tegg-aop-plugin',
-  },
-  tracer: {
-    enable: true,
-    package: 'egg-tracer',
-  },
+    package: 'egg-redis'
+  }
 };
 
+if (process.env.FILE_UPLOAD_TYPE === 'oss') {
+  plugin.oss = {
+    enable: true,
+    package: 'egg-oss'
+  };
+}
 export default plugin;

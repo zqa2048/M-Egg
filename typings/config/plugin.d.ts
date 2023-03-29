@@ -1,6 +1,5 @@
-// This file is created by egg-ts-helper@1.34.7
+// This file is created by egg-ts-helper@1.33.1
 // Do not modify this file!!!!!!!!!
-/* eslint-disable */
 
 import 'egg';
 import 'egg-onerror';
@@ -15,13 +14,9 @@ import 'egg-schedule';
 import 'egg-static';
 import 'egg-jsonp';
 import 'egg-view';
-import '@eggjs/tegg-plugin';
-import '@eggjs/tegg-config';
-import '@eggjs/tegg-controller-plugin';
-import '@eggjs/tegg-schedule-plugin';
-import '@eggjs/tegg-eventbus-plugin';
-import '@eggjs/tegg-aop-plugin';
-import 'egg-tracer';
+import 'egg-cors';
+import 'egg-router-plus';
+import 'egg-redis';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -37,12 +32,8 @@ declare module 'egg' {
     static?: EggPluginItem;
     jsonp?: EggPluginItem;
     view?: EggPluginItem;
-    tegg?: EggPluginItem;
-    teggConfig?: EggPluginItem;
-    teggController?: EggPluginItem;
-    teggSchedule?: EggPluginItem;
-    eventbusModule?: EggPluginItem;
-    aopModule?: EggPluginItem;
-    tracer?: EggPluginItem;
+    cors?: EggPluginItem;
+    routerPlus?: EggPluginItem;
+    redis?: EggPluginItem;
   }
 }

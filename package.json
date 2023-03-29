@@ -1,52 +1,85 @@
 {
-  "name": "egg",
+  "name": "egg-prisma-template-ts",
   "version": "1.0.0",
-  "description": "",
+  "description": "基于docker 的 eggjs + prisma + mysql 的node开发模板",
   "private": true,
   "egg": {
-    "typescript": true
+    "typescript": true,
+    "declarations": true
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-egg",
-    "stop": "egg-scripts stop --title=egg-server-egg",
+    "start": "egg-scripts start --daemon --title=egg-server-egg-prisma-template-ts",
+    "start:docker": "egg-scripts start  --title=egg-server-egg-prisma-template-ts",
+    "stop": "egg-scripts stop --title=egg-server-egg-prisma-template-ts",
     "dev": "egg-bin dev",
-    "test-local": "egg-bin test -p",
+    "debug": "egg-bin debug",
+    "build:docker": "rm -rf logs && rm -rf run && docker build -t prisma-egg-node .",
+    "test-local": "egg-bin test",
     "test": "npm run lint -- --fix && npm run test-local",
-    "cov": "egg-bin cov -p",
-    "ci": "npm run lint && npm run cov && npm run tsc && npm run clean",
-    "lint": "eslint . --ext .ts --cache",
-    "tsc": "tsc",
-    "clean": "tsc -b --clean"
+    "cov": "egg-bin cov",
+    "tsc": "ets && tsc -p tsconfig.json",
+    "ci": "npm run lint && npm run cov && npm run tsc",
+    "autod": "autod",
+    "db:c": "npx prisma migrate dev --name db-change",
+    "db:ui": "npx prisma studio",
+    "db:pull": "npx prisma db pull",
+    "model:b": "npx prisma generate",
+    "lint": "eslint . --ext .ts --resolve-plugins-relative-to .",
+    "clean": "ets clean"
   },
   "dependencies": {
-    "@eggjs/tegg": "^3.5.2",
-    "@eggjs/tegg-aop-plugin": "^3.5.2",
-    "@eggjs/tegg-config": "^3.2.3",
-    "@eggjs/tegg-controller-plugin": "^3.5.2",
-    "@eggjs/tegg-eventbus-plugin": "^3.5.2",
-    "@eggjs/tegg-plugin": "^3.5.2",
-    "@eggjs/tegg-schedule-plugin": "^3.5.2",
-    "egg": "^3.15.0",
+    "@prisma/client": "^4.7.1",
+    "await-stream-ready": "^1.0.1",
+    "axios": "^1.2.1",
+    "cos-nodejs-sdk-v5": "^2.11.18",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
+    "egg": "^3.9.1",
+    "egg-cors": "^2.2.3",
+    "egg-redis": "^2.4.0",
+    "egg-router-plus": "^2.0.0",
     "egg-scripts": "^2.17.0",
-    "egg-tracer": "^2.0.0"
+    "ioredis": "^5.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "koa-jwt": "^4.0.3",
+    "stream-wormhole": "^1.1.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@types/mocha": "10",
-    "@types/node": "18",
-    "@eggjs/tsconfig": "1",
-    "egg-bin": "6",
-    "egg-mock": "5",
-    "eslint": "8",
-    "eslint-config-egg": "12",
-    "typescript": "4"
+    "@eggjs/tsconfig": "^1.0.0",
+    "@types/crypto-js": "^4.1.1",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.12",
+    "@types/supertest": "^2.0.0",
+    "@types/uuid": "^9.0.0",
+    "autod": "^3.1.2",
+    "autod-egg": "^1.1.0",
+    "egg-bin": "^5.9.0",
+    "egg-ci": "^2.1.0",
+    "egg-mock": "^3.16.0",
+    "eslint": "^8.0.0",
+    "eslint-config-egg": "^12.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.1",
+    "prisma": "^4.7.1",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=14.0.0"
+  },
+  "ci": {
+    "version": "14, 16, 18"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/MrGaoGang/frontend-tookit/packages/egg-prisma-template-ts"
   },
-  "author": "",
+  "eslintIgnore": [
+    "coverage"
+  ],
+  "author": "mrgaogang",
   "license": "MIT"
 }
