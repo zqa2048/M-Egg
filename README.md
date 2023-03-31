@@ -1,5 +1,7 @@
 # 基于 docker 的 prisma + eggjs + typescript 的后端请求模板
 
+将原作者的mysql数据库换为postgreSql
+
 > 如果有用记得点击一下 ⭐️ 哦
 
 ## 一、拥有的能力
