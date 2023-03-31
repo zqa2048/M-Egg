@@ -1,4 +1,7 @@
 {
   "root": true,
-  "extends": "eslint-config-egg/typescript"
+  "extends": "eslint-config-egg/typescript",
+  "rules": {
+    "quotes": ["off"] // 不使用引号
+  }
 }

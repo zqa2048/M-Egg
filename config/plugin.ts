@@ -1,4 +1,4 @@
-import { EggPlugin } from 'egg';
+import { EggPlugin } from "egg";
 
 const plugin: EggPlugin = {
   static: true,
@@ -8,22 +8,22 @@ const plugin: EggPlugin = {
   // },
   cors: {
     enable: true,
-    package: 'egg-cors'
+    package: "egg-cors",
   },
   routerPlus: {
     enable: true,
-    package: 'egg-router-plus'
+    package: "egg-router-plus",
   },
   redis: {
     enable: true,
-    package: 'egg-redis'
-  }
+    package: "egg-redis",
+  },
 };
 
-if (process.env.FILE_UPLOAD_TYPE === 'oss') {
+if (process.env.FILE_UPLOAD_TYPE === "oss") {
   plugin.oss = {
     enable: true,
-    package: 'egg-oss'
+    package: "egg-oss",
   };
 }
 export default plugin;

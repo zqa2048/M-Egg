@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client'
-import koajwt from 'koa-jwt'
+import { PrismaClient } from "@prisma/client";
+import koajwt from "koa-jwt";
 import jwt, {
   Secret,
   SignOptions,
@@ -7,12 +7,12 @@ import jwt, {
   GetPublicKeyOrSecret,
   VerifyOptions,
   VerifyCallback,
-  Jwt
-} from 'jsonwebtoken'
-import { EggAppConfig } from 'egg'
-import {cos} from '../utils/cos'
-const JWT = Symbol('Application#jwt')
-const prisma = new PrismaClient()
+  Jwt,
+} from "jsonwebtoken";
+import { EggAppConfig } from "egg";
+import { cos } from "../utils/cos";
+const JWT = Symbol("Application#jwt");
+const prisma = new PrismaClient();
 
 type JWTToken = {
   /**
@@ -27,7 +27,7 @@ type JWTToken = {
     secretOrPrivateKey: string,
     options?: SignOptions,
     callback?: SignCallback
-  ): string
+  ): string;
   /**
    * call jsonwebtoken's verify() method
    * @param token jwt token.
@@ -40,14 +40,14 @@ type JWTToken = {
     secretOrPrivateKey: string,
     options?: VerifyOptions,
     callback?: VerifyCallback
-  ): Record<string, any>
+  ): Record<string, any>;
 
   /**
    * call jsonwebtoken's decode() method
    * @param token jwt token
    */
-  decode(token: string): string
-}
+  decode(token: string): string;
+};
 
 export default {
   prisma,
@@ -56,8 +56,8 @@ export default {
     if (!this[JWT]) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      const config = (this.config as EggAppConfig).jwt
-      this[JWT] = koajwt(config)
+      const config = (this.config as EggAppConfig).jwt;
+      this[JWT] = koajwt(config);
 
       this[JWT].sign = (
         payload: string | Buffer | object,
@@ -65,13 +65,18 @@ export default {
         options: SignOptions,
         callback: SignCallback
       ) => {
-        if (typeof options === 'function') {
-          callback = options
-          options = {}
+        if (typeof options === "function") {
+          callback = options;
+          options = {};
         }
 
-        return jwt.sign(payload, secret, Object.assign({}, config.sign || {}, options), callback)
-      }
+        return jwt.sign(
+          payload,
+          secret,
+          Object.assign({}, config.sign || {}, options),
+          callback
+        );
+      };
 
       this[JWT].verify = (
         token: string,
@@ -79,17 +84,22 @@ export default {
         options: VerifyOptions & { complete?: true },
         callback: VerifyCallback<Jwt>
       ) => {
-        if (typeof options === 'function') {
-          callback = options
-          options = {}
+        if (typeof options === "function") {
+          callback = options;
+          options = {};
         }
 
-        return jwt.verify(token, secret, Object.assign({}, config.verify || {}, options), callback)
-      }
+        return jwt.verify(
+          token,
+          secret,
+          Object.assign({}, config.verify || {}, options),
+          callback
+        );
+      };
 
-      this[JWT].decode = jwt.decode
+      this[JWT].decode = jwt.decode;
       //   this[JWT].UnauthorizedError = UnauthorizedError;
     }
-    return this[JWT]
-  }
-}
+    return this[JWT];
+  },
+};

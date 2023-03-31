@@ -1,7 +1,7 @@
-import { Controller } from 'egg';
-import { StatusCode } from '../const/status';
-import { setTokenToRedis } from '../redis/token';
-import { encode } from '../utils/encode';
+import { Controller } from "egg";
+import { StatusCode } from "../const/status";
+import { setTokenToRedis } from "../redis/token";
+import { encode } from "../utils/encode";
 
 export default class AuthorController extends Controller {
   public async login() {
@@ -16,7 +16,7 @@ export default class AuthorController extends Controller {
           {
             username,
             password: encode(password),
-            uid: data.uid
+            uid: data.uid,
           },
           app.config.jwt.secret
         );
@@ -26,15 +26,15 @@ export default class AuthorController extends Controller {
         await setTokenToRedis(app, data.uid, token);
         ctx.success(
           {
-            token
+            token,
           },
-          'login success'
+          "login success"
         );
       } else {
-        ctx.result(StatusCode.UnAuthorized, 'username/password is not correct');
+        ctx.result(StatusCode.UnAuthorized, "username/password is not correct");
       }
     } else {
-      ctx.fail('username and password should be not null');
+      ctx.fail("username and password should be not null");
     }
   }
 
@@ -44,17 +44,17 @@ export default class AuthorController extends Controller {
 
     if (username && password) {
       const data = await ctx.service.user.registerUser(username, password);
-      if (typeof data === 'boolean') {
-        ctx.fail('current use has exist, please do login');
+      if (typeof data === "boolean") {
+        ctx.fail("current use has exist, please do login");
         return;
       }
       if (data) {
-        ctx.success({}, 'user register success');
+        ctx.success({}, "user register success");
       } else {
-        ctx.fail('username/password should not be null');
+        ctx.fail("username/password should not be null");
       }
     } else {
-      ctx.fail('username and password should be not null');
+      ctx.fail("username and password should be not null");
     }
   }
 }

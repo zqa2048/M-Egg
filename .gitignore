@@ -11,6 +11,8 @@ logs/
 *.lock
 *.js
 .eslintcache
+.history
+.env
 
 app/**/*.js
 test/**/*.js
