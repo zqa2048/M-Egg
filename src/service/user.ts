@@ -21,9 +21,23 @@ export class User {
     console.log('options2222', options);
     const user: any = await prisma.user.findUnique({
       where: {
-        id: +options.uid,
+        id: options.uid,
       },
     });
     return user;
+  }
+  createUser(data) {
+    if (data.id) {
+      return prisma.user.update({
+        where: {
+          id: data.id,
+        },
+        data,
+      });
+    } else {
+      return prisma.user.create({
+        data,
+      });
+    }
   }
 }

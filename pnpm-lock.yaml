@@ -1,12 +1,14 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@midwayjs/axios': 3.11.6
   '@midwayjs/bootstrap': ^3.0.0
   '@midwayjs/cli': ^2.0.0
   '@midwayjs/core': ^3.0.0
   '@midwayjs/decorator': ^3.0.0
   '@midwayjs/egg-ts-helper': ^1.0.1
   '@midwayjs/mock': ^3.0.0
+  '@midwayjs/validate': '3'
   '@midwayjs/web': ^3.0.0
   '@prisma/client': ^4.12.0
   '@types/jest': ^29.2.0
@@ -23,9 +25,11 @@ specifiers:
   typescript: ~4.8.0
 
 dependencies:
+  '@midwayjs/axios': 3.11.6
   '@midwayjs/bootstrap': 3.11.1
   '@midwayjs/core': 3.11.1
   '@midwayjs/decorator': 3.11.1
+  '@midwayjs/validate': 3.11.6
   '@midwayjs/web': 3.11.1
   '@prisma/client': 4.12.0_prisma@4.12.0
   egg: 2.37.0
@@ -663,6 +667,16 @@ packages:
       - supports-color
     dev: true
 
+  /@hapi/hoek/9.3.0:
+    resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
+    dev: false
+
+  /@hapi/topo/5.1.0:
+    resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
+    dependencies:
+      '@hapi/hoek': 9.3.0
+    dev: false
+
   /@humanwhocodes/config-array/0.5.0:
     resolution: {integrity: sha512-FagtKFz74XrTl7y6HCzQpwDfXP0yhxe9lHLD1UZxjvZIcbyRz8zTFF/yYNfSfzU414eDwZ1SrO0Qvtyf+wFMQg==}
     engines: {node: '>=10.10.0'}
@@ -953,6 +967,15 @@ packages:
     resolution: {integrity: sha512-KuirAE3HY6eisNNi8dxezfIheOhOnaDU5hoV7hv3sb72IKOIIiUX9XHq1duHuZaOCeonn14XrL5CamT963NLiQ==}
     engines: {node: '>=12.17.0'}
 
+  /@midwayjs/axios/3.11.6:
+    resolution: {integrity: sha512-9QkZnin/1NrZLKXfrcf3cTc6QLgEENRVxv1bTWqnsbBfYF9vH7GWQ0H1yIXap7oOWXAnvCo8kiiFw0DAtBfyPg==}
+    engines: {node: '>=12'}
+    dependencies:
+      axios: 1.3.4
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /@midwayjs/bootstrap/3.11.1:
     resolution: {integrity: sha512-vma2XpmZHtWXIjbtsr+5XcwjSjk3O4ndr5Oj1haMZ1f170IbmChQTEUoyy3Oh0omBuYmDs4GywkAkXL3toK8AA==}
     engines: {node: '>=12.11.0'}
@@ -1125,6 +1148,13 @@ packages:
       picomatch: 2.3.1
     dev: false
 
+  /@midwayjs/i18n/3.11.6:
+    resolution: {integrity: sha512-f1Cd8mKfZ9pz0EYQXuKMtNKmM9hJXTsyhjPbiDgO6ipDSleigB9wNTY4+Yzg4PbKG6jwo2abspnpJfGNoHmCuw==}
+    engines: {node: '>=12'}
+    dependencies:
+      picomatch: 2.3.1
+    dev: false
+
   /@midwayjs/locate/1.8.1:
     resolution: {integrity: sha512-ZlYKENlBOtN6ODZk9+iHdJcrV+IYk+CZXqyQMT6VzTmBoE/z/HnAxKq39uJsn+dzDTR+c18/qdYVRZ0feKSHMw==}
     dependencies:
@@ -1177,6 +1207,14 @@ packages:
       js-yaml: 4.1.0
       mkdirp: 0.5.6
     dev: true
+
+  /@midwayjs/validate/3.11.6:
+    resolution: {integrity: sha512-1YSDVA9hPWqLi+gwhwuHYWNy4v+5NmmEfVepCnUK+NV2KUsXTkUWcTD5N4jOtlX8XKLVAaute7ArFGG2ZIhEcg==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@midwayjs/i18n': 3.11.6
+      joi: 17.9.1
+    dev: false
 
   /@midwayjs/version/3.11.1:
     resolution: {integrity: sha512-gnZFX/GU2vRElolHGaadmWvJHCzoRAsJw+Dk+yZq5ZI734Cnd1qFYIUBdxXFet4GzTkydXMN2r0l6HOMicg7UQ==}
@@ -1248,6 +1286,20 @@ packages:
   /@prisma/engines/4.12.0:
     resolution: {integrity: sha512-0alKtnxhNB5hYU+ymESBlGI4b9XrGGSdv7Ud+8TE/fBNOEhIud0XQsAR+TrvUZgS4na5czubiMsODw0TUrgkIA==}
     requiresBuild: true
+
+  /@sideway/address/4.1.4:
+    resolution: {integrity: sha512-7vwq+rOHVWjyXxVlR76Agnvhy8I9rpzjosTESvmhNeXOXdZZB15Fl+TI9x1SiHZH5Jv2wTGduSxFDIaq0m3DUw==}
+    dependencies:
+      '@hapi/hoek': 9.3.0
+    dev: false
+
+  /@sideway/formula/3.0.1:
+    resolution: {integrity: sha512-/poHZJJVjx3L+zVD6g9KgHfYnb443oi7wLu/XKojDviHy6HOEOA6z1Trk5aR1dGcmPenJEgb2sK2I80LeS3MIg==}
+    dev: false
+
+  /@sideway/pinpoint/2.0.0:
+    resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
+    dev: false
 
   /@sinclair/typebox/0.25.24:
     resolution: {integrity: sha512-XJfwUVUKDHF5ugKwIcxEgc9k8b7HbznCp6eUfWgu710hMPNIO4aw4/zB5RogDQz8nd6gyCDpU9O/m6qYEWY6yQ==}
@@ -1920,7 +1972,6 @@ packages:
 
   /asynckit/0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
-    dev: true
 
   /at-least-node/1.0.0:
     resolution: {integrity: sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==}
@@ -1941,6 +1992,16 @@ packages:
     engines: {node: '>= 6.0.0'}
     dependencies:
       ee-first: 1.1.1
+    dev: false
+
+  /axios/1.3.4:
+    resolution: {integrity: sha512-toYm+Bsyl6VC5wSkfkbbNB6ROv7KY93PEBBL6xyDczaIHasAiv4wPqQ/c4RjoQzipxRD2W5g21cOqQulZ7rHwQ==}
+    dependencies:
+      follow-redirects: 1.15.2
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /babel-jest/29.5.0_@babel+core@7.21.4:
@@ -2470,7 +2531,6 @@ packages:
     engines: {node: '>= 0.8'}
     dependencies:
       delayed-stream: 1.0.0
-    dev: true
 
   /commander/2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
@@ -2759,7 +2819,6 @@ packages:
   /delayed-stream/1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
     engines: {node: '>=0.4.0'}
-    dev: true
 
   /delegates/1.0.0:
     resolution: {integrity: sha512-bd2L678uiWATM6m5Z1VzNCErI3jiGzt6HGY8OVICs40JQq/HALfbyNJmp0UDakEY4pMMaN0Ly5om/B1VI/+xfQ==}
@@ -3752,6 +3811,16 @@ packages:
     resolution: {integrity: sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==}
     dev: false
 
+  /follow-redirects/1.15.2:
+    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
+
   /for-in/1.0.2:
     resolution: {integrity: sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ==}
     engines: {node: '>=0.10.0'}
@@ -3773,7 +3842,6 @@ packages:
       asynckit: 0.4.0
       combined-stream: 1.0.8
       mime-types: 2.1.35
-    dev: true
 
   /formidable/1.2.6:
     resolution: {integrity: sha512-KcpbcpuLNOwrEjnbpMC0gS+X8ciDoZE1kkqzat4a8vrprf+s9pKNQ/QIwWfbfs4ltgmFl3MD177SNTkve3BwGQ==}
@@ -5020,6 +5088,16 @@ packages:
       - supports-color
       - ts-node
     dev: true
+
+  /joi/17.9.1:
+    resolution: {integrity: sha512-FariIi9j6QODKATGBrEX7HZcja8Bsh3rfdGYy/Sb65sGlZWK/QWesU1ghk7aJWDj95knjXlQfSmzFSPPkLVsfw==}
+    dependencies:
+      '@hapi/hoek': 9.3.0
+      '@hapi/topo': 5.1.0
+      '@sideway/address': 4.1.4
+      '@sideway/formula': 3.0.1
+      '@sideway/pinpoint': 2.0.0
+    dev: false
 
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
