@@ -1,12 +1,24 @@
-import { Inject, Controller, Query, Get, Post, Body } from '@midwayjs/core';
-import { Context } from 'egg';
+import {
+  Inject,
+  Controller,
+  Query,
+  Get,
+  Post,
+  Body,
+  App,
+} from '@midwayjs/core';
+import { Context, Application } from 'egg';
 import { IGetUserResponse } from '../interface';
 import { UserService, User } from '../service/user';
 import { HttpService } from '@midwayjs/axios';
-import { UserDTO } from '../dto/user';
+import { LoginDTO, UserDTO } from '../dto/user';
+import { ValidateService } from '@midwayjs/validate';
 
 @Controller('/api')
 export class APIController {
+  @App()
+  app: Application;
+
   @Inject()
   ctx: Context;
 
@@ -18,6 +30,9 @@ export class APIController {
 
   @Inject()
   User: User;
+
+  @Inject()
+  validateService: ValidateService;
 
   @Get('/get_user')
   async getUser(@Query('uid') uid: string): Promise<IGetUserResponse> {
@@ -37,6 +52,33 @@ export class APIController {
   async createAndUpdateUser(@Body() user: UserDTO): Promise<{}> {
     console.log('user', user);
     const data = await this.User.createUser(user);
+    return data;
+  }
+
+  @Post('/register')
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  async register(@Body() user): Promise<{}> {
+    console.log('user111', user);
+    const result = this.validateService.validate(LoginDTO, user);
+    const data = await this.User.register(result);
+    return data;
+  }
+
+  @Post('/login')
+  async login(@Body() loginData): Promise<object> {
+    const result = this.validateService.validate(LoginDTO, loginData);
+    const data = await this.User.login(result);
+    console.log('data', data);
+    if (data?.email) {
+      const jwtConfig = this.app.config.jwt;
+      console.log('jwtConfig', jwtConfig);
+      const token = await this.User.getToken(data, jwtConfig.secret, {
+        expiresIn: 60 * 60,
+      });
+      return {
+        token,
+      };
+    }
     return data;
   }
 }

@@ -16,6 +16,7 @@ model User {
   email String  @unique
   name  String?
   posts Post[]
+  login login[]
 }
 
 model Post {
@@ -28,4 +29,12 @@ model Post {
   viewCount Int      @default(0)
   authorId  String?  @db.ObjectId
   author    User?    @relation(fields: [authorId], references: [id])
+}
+
+model login {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
+  username String?
+  password String
+  user     User   @relation(fields: [email], references: [email])
 }

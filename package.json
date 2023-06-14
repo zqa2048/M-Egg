@@ -8,6 +8,7 @@
     "@midwayjs/bootstrap": "^3.0.0",
     "@midwayjs/core": "^3.0.0",
     "@midwayjs/decorator": "^3.0.0",
+    "@midwayjs/jwt": "3",
     "@midwayjs/validate": "3",
     "@midwayjs/web": "^3.0.0",
     "@prisma/client": "^4.12.0",
