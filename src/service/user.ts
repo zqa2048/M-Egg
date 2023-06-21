@@ -1,3 +1,4 @@
+import { Utils } from '../utils/method';
 import { Inject, Provide } from '@midwayjs/core';
 import { IUserOptions } from '../interface';
 import { prisma } from '../prisma';
@@ -20,6 +21,9 @@ export class UserService {
 export class User {
   @Inject()
   jwtService: JwtService;
+
+  @Inject()
+  utils: Utils;
 
   async getUser(options: IUserOptions) {
     console.log('options2222', options);
@@ -66,15 +70,12 @@ export class User {
       },
     });
   }
-  async getToken(data, secret, options) {
+  async getToken(data) {
     const user = await this.getUserInfo(data);
-    console.log('user', JSON.stringify(user));
-    const res = await this.jwtService.sign(
-      { user: JSON.stringify(user) },
-      secret,
-      options
-    );
-    console.log('res', res);
+
+    console.log(1);
+    const res = await this.utils.getToken(user);
+    console.log(2);
     return res;
   }
 }

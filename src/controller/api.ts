@@ -70,11 +70,7 @@ export class APIController {
     const data = await this.User.login(result);
     console.log('data', data);
     if (data?.email) {
-      const jwtConfig = this.app.config.jwt;
-      console.log('jwtConfig', jwtConfig);
-      const token = await this.User.getToken(data, jwtConfig.secret, {
-        expiresIn: 60 * 60,
-      });
+      const token = await this.User.getToken(data);
       return {
         token,
       };

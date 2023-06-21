@@ -7,17 +7,22 @@ import * as validate from '@midwayjs/validate';
 import { ValidateErrorFilter } from './filter/validate.filter';
 import * as jwt from '@midwayjs/jwt';
 import { JwtMiddleware } from './middleware/jwt.middleware';
+import { prisma } from './prisma';
 
+interface IMoreApp {
+  prisma: typeof prisma;
+}
 @Configuration({
   imports: [egg, axios, validate, jwt],
   importConfigs: [join(__dirname, './config')],
 })
 export class ContainerLifeCycle implements ILifeCycle {
   @App()
-  app: Application;
+  app: Application & IMoreApp;
 
   async onReady() {
     this.app.useFilter([ValidateErrorFilter]);
-    this.app.useMiddleware(JwtMiddleware);
+    this.app.useMiddleware([JwtMiddleware]);
+    this.app.prisma = prisma;
   }
 }
