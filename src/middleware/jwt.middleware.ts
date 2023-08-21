@@ -3,7 +3,12 @@ import { Context } from 'egg';
 import { JwtService } from '@midwayjs/jwt';
 import { Utils } from '../utils/method';
 
-const whiteList = ['/api/login', '/register'];
+const whiteList = [
+  '/api/login',
+  '/api/register',
+  '/api/get-image-captcha',
+  '/api/get_users',
+];
 
 @Middleware()
 export class JwtMiddleware {
@@ -38,11 +43,11 @@ export class JwtMiddleware {
           console.log('res', res);
         } catch (e) {
           console.log('e', e);
-          const user = await this.jwtService.decode(token);
+          const user = this.jwtService.decode(token);
           console.log('user>>>', user);
           const newToken = await this.utils.getToken(user);
           console.log('newToken', newToken);
-          ctx.set('Authorization', newToken);
+          ctx.set('Authorization', `Bearer ${newToken}`);
         }
       } else {
         throw new httpError.UnauthorizedError();

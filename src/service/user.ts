@@ -29,7 +29,7 @@ export class User {
     console.log('options2222', options);
     const user: any = await prisma.user.findUnique({
       where: {
-        id: options.uid,
+        id: +options.uid,
       },
     });
     return user;
@@ -49,12 +49,13 @@ export class User {
     }
   }
   async register(data) {
-    return prisma.login.create({
+    return prisma.user.create({
       data,
     });
   }
   async login(data) {
-    return prisma.login.findFirst({
+    console.log('data', data);
+    return prisma.user.findFirst({
       where: {
         email: data.email,
       },
@@ -76,6 +77,19 @@ export class User {
     console.log(1);
     const res = await this.utils.getToken(user);
     console.log(2);
+    await prisma.logined.create({
+      data: {
+        userId: user.id,
+        token: res,
+      },
+    });
     return res;
   }
+  // checkLogin(data) {
+  //   return prisma.logined.findFirst({
+  //     where: {
+  //       token: data.token,
+  //     },
+  //   });
+  // }
 }

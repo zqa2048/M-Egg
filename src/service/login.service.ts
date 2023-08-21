@@ -4,7 +4,7 @@ import { prisma } from '../prisma';
 @Provide()
 export class LoginStatus {
   async register(data) {
-    return prisma.login.create({
+    return prisma.logined.create({
       data,
     });
   }

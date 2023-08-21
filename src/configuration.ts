@@ -8,12 +8,13 @@ import { ValidateErrorFilter } from './filter/validate.filter';
 import * as jwt from '@midwayjs/jwt';
 import { JwtMiddleware } from './middleware/jwt.middleware';
 import { prisma } from './prisma';
+import * as captcha from '@midwayjs/captcha';
 
 interface IMoreApp {
   prisma: typeof prisma;
 }
 @Configuration({
-  imports: [egg, axios, validate, jwt],
+  imports: [egg, axios, validate, jwt, captcha],
   importConfigs: [join(__dirname, './config')],
 })
 export class ContainerLifeCycle implements ILifeCycle {

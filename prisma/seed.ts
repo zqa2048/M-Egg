@@ -1,8 +1,8 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+const { Prisma, PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-const userData: Prisma.UserCreateInput[] = [
+const userData = [
   {
     name: 'Alice',
     email: 'alice@prisma.io',
@@ -56,13 +56,14 @@ async function main() {
   //   });
   //   console.log(`Created user with id: ${user.id}`);
   // }
-  const allUsers = await prisma.user.create({
-    data: {
-      name: 'Mahmoud',
-      email: 'mahmoud@prisma.io',
-    },
-  });
-  console.log('allUsers', allUsers);
+  // const allUsers = await prisma.user.create({
+  //   data: {
+  //     name: 'Mahmoud',
+  //     email: 'mahmoud@prisma.io',
+  //   },
+  // });
+  const data = await prisma.user.findMany();
+  console.log('allUsers', data);
 
   console.log('Seeding finished.');
 }

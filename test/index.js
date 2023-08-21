@@ -54,16 +54,16 @@ async function main() {
   console.log('Start seeding ...');
   await prisma.$connect();
   // console.log('prisma', prisma.user);
-  // const allUsers = await prisma.user.findMany();
-  // console.log('allUsers', allUsers);
+  const allUsers = await prisma.user.findMany();
+  console.log('allUsers', allUsers);
 
-  const user = await prisma.user.create({
-    data: {
-      name: 'Mahmoud222',
-      email: 'mahmoud222@prisma.io',
-    },
-  });
-  console.log('user', user);
+  // const user = await prisma.user.create({
+  //   data: {
+  //     name: 'Mahmoud222',
+  //     email: 'mahmoud222@prisma.io',
+  //   },
+  // });
+  // console.log('user', user);
   /* for (const u of userData) {
     const user = await prisma.User.create({
       data: u,

@@ -31,5 +31,5 @@ export class LoginDTO {
   // name  String?
   // posts Post[]
   @Rule(RuleType.string())
-  username?: string;
+  name: string;
 }
